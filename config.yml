@@ -1,0 +1,8 @@
+Welcome-Message: "&2Welcome to Hybrid!"
+spawn:
+   world: World
+   x: 0
+   y: 60
+   z: 0
+   yaw: 0
+   pitch: 0

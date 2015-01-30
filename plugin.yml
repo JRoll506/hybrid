@@ -1,0 +1,26 @@
+name: Hybrid
+main: com.rbruno.hybrid.Main
+version: 0.1
+author: JRoll506
+commands:
+  hsetspawn:
+    description: Sets spawn
+  spawn:
+    description: Goes to spawn
+  hpos:
+    description: Sets pos1
+  hcreate:
+    description: Creats an arena
+  hregen:
+    description: regens arena
+  hlist:
+    description: lists arenas
+  hreload:
+    description: reloads config
+  hrankadd:
+    description: added a rank
+  rankup:
+    description: ranks you up
+  Arena:
+    description: TPs you to an arena
+
