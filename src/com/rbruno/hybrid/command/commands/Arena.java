@@ -28,7 +28,7 @@ public class Arena extends EngineCommand {
 				if (arena.getName().equals(args[0])){
 					if (player.hasPermission("hybrid.arena.*")||player.hasPermission("hybrid.arena." + args[0])){
 						player.teleport(arena.getSpawn());
-						player.sendMessage(ChatColor.GREEN + "Teleporting");
+						player.sendMessage(ChatColor.GREEN + "Teleporting you to arena \"" + args[0] + "\"");
 						return;
 					}
 					player.sendMessage(this.getPermissionMessage());

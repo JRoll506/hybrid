@@ -23,4 +23,6 @@ commands:
     description: ranks you up
   Arena:
     description: TPs you to an arena
+  hremove:
+    description: Removes an arena
 

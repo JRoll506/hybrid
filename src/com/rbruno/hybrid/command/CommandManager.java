@@ -10,6 +10,7 @@ import com.rbruno.hybrid.command.commands.Hpos;
 import com.rbruno.hybrid.command.commands.Hrankadd;
 import com.rbruno.hybrid.command.commands.Hregen;
 import com.rbruno.hybrid.command.commands.Hreload;
+import com.rbruno.hybrid.command.commands.Hremove;
 import com.rbruno.hybrid.command.commands.Hsetspawn;
 import com.rbruno.hybrid.command.commands.Rankup;
 import com.rbruno.hybrid.command.commands.Spawn;
@@ -31,6 +32,7 @@ public class CommandManager {
 		this.commads.add(new Hrankadd(main));
 		this.commads.add(new Rankup(main));
 		this.commads.add(new Arena(main));
+		this.commads.add(new Hremove(main));
 	}
 
 }
