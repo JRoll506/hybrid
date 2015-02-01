@@ -1,6 +1,5 @@
 package com.rbruno.hybrid.command.commands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -22,7 +21,6 @@ public class Hregen extends EngineCommand {
 				for (Arena arena : this.getMain().arenas) {
 					if (arena.getName().equals(args[0])) {
 						arena.regen();
-						Bukkit.broadcastMessage(ChatColor.GREEN + "Regenerating arena " + arena.getName());
 						return;
 					}
 				}
@@ -34,7 +32,6 @@ public class Hregen extends EngineCommand {
 			for (Arena arena : this.getMain().arenas) {
 				if (arena.getName().equals(args[0])) {
 					arena.regen();
-					Bukkit.broadcastMessage(ChatColor.GREEN + "Regenerating arena " + arena.getName());
 					return;
 				}
 			}

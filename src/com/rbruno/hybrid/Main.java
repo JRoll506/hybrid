@@ -45,7 +45,10 @@ public class Main extends JavaPlugin {
 			Location pos1 = new Location(Bukkit.getWorld(getConfig().getString("Arenas." + string + ".world")), getConfig().getInt("Arenas." + string + ".pos1.x"), getConfig().getInt("Arenas." + string + ".pos1.y"), getConfig().getInt("Arenas." + string + ".pos1.z"));
 			Location pos2 = new Location(Bukkit.getWorld(getConfig().getString("Arenas." + string + ".world")), getConfig().getInt("Arenas." + string + ".pos2.x"), getConfig().getInt("Arenas." + string + ".pos2.y"), getConfig().getInt("Arenas." + string + ".pos2.z"));
 			Location spawn = new Location(Bukkit.getWorld(getConfig().getString("Arenas." + string + ".world")), getConfig().getInt("Arenas." + string + ".spawn.x"), getConfig().getInt("Arenas." + string + ".spawn.y"), getConfig().getInt("Arenas." + string + ".spawn.z"), Float.parseFloat(getConfig().getString("Arenas." + string + ".spawn.yaw")), Float.parseFloat(getConfig().getString("Arenas." + string + ".spawn.pitch")));
-			arenas.add(new Arena(string, pos1, pos2, spawn, this));
+			Arena arena = new Arena(string, pos1, pos2, spawn, this);
+			arena.startClock();
+			arenas.add(arena);
+			
 		}
 	}
 

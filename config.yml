@@ -1,4 +1,5 @@
 Welcome-Message: "&2Welcome to Hybrid!"
+arena-reset-time: 60
 spawn:
    world: World
    x: 0
