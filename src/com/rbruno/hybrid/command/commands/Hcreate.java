@@ -24,22 +24,22 @@ public class Hcreate extends EngineCommand {
 		Player player = (Player) sender;
 		if (player.hasPermission(this.getPermission())) {
 			if (args.length < 1) {
-				player.sendMessage(ChatColor.RED + "Invalid args");
+				this.getMessage().sendMessage(player,ChatColor.RED + "Invalid args");
 				return;
 			}
 			if (!(hpos.pos1.containsKey(player))||!(hpos.pos2.containsKey(player))){
-				player.sendMessage(ChatColor.RED + "");
+				this.getMessage().sendMessage(player,ChatColor.RED + "");
 			}
 			for (Arena arena : this.getMain().arenas) {
 				if (arena.getName().equalsIgnoreCase(args[0])) {
-					player.sendMessage(ChatColor.RED + "Name already taken");
+					this.getMessage().sendMessage(player,ChatColor.RED + "Name already taken");
 					return;
 				}
 			}
-			player.sendMessage(ChatColor.GREEN + "Arena \"" + args[0] + "\" created!");
+			this.getMessage().sendMessage(player,ChatColor.GREEN + "Arena \"" + args[0] + "\" created!");
 			this.getMain().createArena(args[0], hpos.pos1.get(player), hpos.pos2.get(player), player.getLocation());
 		} else {
-			player.sendMessage(this.getPermissionMessage());
+			this.getMessage().sendMessage(player,this.getPermissionMessage());
 		}
 	}
 }

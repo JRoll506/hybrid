@@ -23,9 +23,9 @@ public class Hsetspawn extends EngineCommand {
 		if (player.hasPermission(this.getPermission())){
 			Location location = player.getLocation();
 			this.getMain().getLocations().setSpawn(location.getWorld().getName(), location.getX(), location.getY(), location.getZ(),location.getYaw(), location.getPitch());
-			player.sendMessage(ChatColor.GREEN + "Spawn set!");
+			this.getMessage().sendMessage(player,ChatColor.GREEN + "Spawn set!");
 		} else{
-			player.sendMessage(this.getPermissionMessage());
+			this.getMessage().sendMessage(player,this.getPermissionMessage());
 		}
 		
 	}

@@ -22,7 +22,7 @@ public class Spawn extends EngineCommand {
 		if (player.hasPermission(this.getPermission())) {
 			player.teleport(this.getMain().getLocations().getSpawn());
 		} else {
-			player.sendMessage(this.getPermissionMessage());
+			this.getMessage().sendMessage(player,this.getPermissionMessage());
 		}
 	}
 

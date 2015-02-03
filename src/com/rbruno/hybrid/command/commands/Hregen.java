@@ -24,9 +24,9 @@ public class Hregen extends EngineCommand {
 						return;
 					}
 				}
-				player.sendMessage(ChatColor.RED + "Arena not found \"" + args[0] + "\"");
+				this.getMessage().sendMessage(player,ChatColor.RED + "Arena not found \"" + args[0] + "\"");
 			} else {
-				player.sendMessage(this.getPermissionMessage());
+				this.getMessage().sendMessage(player,this.getPermissionMessage());
 			}
 		} else {
 			for (Arena arena : this.getMain().arenas) {

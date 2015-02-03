@@ -27,24 +27,24 @@ public class Rankup extends EngineCommand {
 			int rank = this.getConfig().getInt("Players." + player.getUniqueId());
 			EngineRank nextRank = this.getMain().getRank().getRank(rank + 1);
 			if (nextRank == null){
-				player.sendMessage(ChatColor.RED + "You have reached the maximum rank");
+				this.getMessage().sendMessage(player,ChatColor.RED + "You have reached the maximum rank");
 				return;
 			}
 			if (player.getInventory().contains(Material.getMaterial(nextRank.getItem()), nextRank.getAmount())){
 				this.getMain().getRank().setRank(player, nextRank.getTear());
-				player.sendMessage(ChatColor.GREEN + "You have been ranked up to \"" + nextRank.getName() + "\"");
+				this.getMessage().sendMessage(player,ChatColor.GREEN + "You have been ranked up to \"" + nextRank.getName() + "\"");
 				player.getInventory().remove(new ItemStack(nextRank.getItem(), nextRank.getAmount()));
 				EngineRank nextnextRank = this.getMain().getRank().getRank(rank + 2);
 				if (nextnextRank == null){
-					player.sendMessage(ChatColor.RED + "You have reached the maximum rank");
+					this.getMessage().sendMessage(player,ChatColor.RED + "You have reached the maximum rank");
 					return;
 				}
-				player.sendMessage(ChatColor.GREEN + "Your next missions is to collect " + nextnextRank.getAmount() + "x of " + Material.getMaterial(nextRank.getItem()).name());
+				this.getMessage().sendMessage(player,ChatColor.GREEN + "Your next missions is to collect " + nextnextRank.getAmount() + "x of " + Material.getMaterial(nextRank.getItem()).name());
 			} else {
-				player.sendMessage(ChatColor.RED + "ERROR: You must have " + nextRank.getAmount() + "x of " + Material.getMaterial(nextRank.getItem()).name());
+				this.getMessage().sendMessage(player,ChatColor.RED + "ERROR: You must have " + nextRank.getAmount() + "x of " + Material.getMaterial(nextRank.getItem()).name());
 			}
 		} else {
-			player.sendMessage(this.getPermissionMessage());
+			this.getMessage().sendMessage(player,this.getPermissionMessage());
 		}
 	}
 

@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import com.rbruno.hybrid.Main;
+import com.rbruno.hybrid.messenger.Message;
 
 public class EngineCommand {
 
@@ -38,6 +39,10 @@ public class EngineCommand {
 	
 	public Main getMain(){
 		return main;
+	}
+	
+	public Message getMessage(){
+		return main.getMessage();
 	}
 	
 	public FileConfiguration getConfig(){

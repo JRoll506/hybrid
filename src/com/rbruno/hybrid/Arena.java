@@ -18,6 +18,7 @@ public class Arena {
 	// private Random random = new Random();
 
 	private Material[] blocks;
+	private int[] data;
 
 	public Arena(String name, Location pos1, Location pos2, Location spawn, Main main) {
 		this.name = name;
@@ -28,21 +29,26 @@ public class Arena {
 
 	}
 	
-	public Arena(String name, Location pos1, Location pos2, Location spawn, int[] ints, Main main) {
+	public Arena(String name, Location pos1, Location pos2, Location spawn, int[] ints, int[] data,  Main main) {
 		this.name = name;
 		this.pos1 = pos1;
 		this.pos2 = pos2;
 		this.spawn = spawn;
 		this.main = main;
 		this.blocks = phraseMaterial(ints);
+		this.data = data;
 
 	}
 
+
+	
 	@SuppressWarnings("deprecation")
 	private Material[] phraseMaterial(int[] ints) {
 		Material[] material = new Material[ints.length];
 		for (int i = 0; i<ints.length;i++){
+			
 			material[i] = Material.getMaterial(ints[i]);
+			
 		}
 		return material;
 	}
@@ -74,20 +80,29 @@ public class Arena {
 			ints[i] = blocks[i].getId();
 		}
 		config.set("Arenas." + name + ".spawn.blocks", ints);
+		
+		int[] blockData = new int[blocks.length];
+		for (int i = 0; i < blockData.length; i++){
+			blockData[i] = data[i];
+		}
+		config.set("Arenas." + name + ".spawn.data", blockData);
 		main.saveConfig();
 		startClock();
 	}
 
+	@SuppressWarnings("deprecation")
 	private void saveArena() {
 		int height, width, depth;
 		width = pos2.getBlockX() - pos1.getBlockX() + 1;
 		depth = pos2.getBlockZ() - pos1.getBlockZ() + 1;
 		height = pos2.getBlockY() - pos1.getBlockY() + 1;
 		blocks = new Material[width * depth * height];
+		data = new int[width * depth * height];
 		for (int y = 0; y < height; y++) {
 			for (int z = 0; z < depth; z++) {
 				for (int x = 0; x < width; x++) {
 					Block block = pos1.getWorld().getBlockAt(pos1.getBlockX() + x, pos1.getBlockY() + y, pos1.getBlockZ() + z);
+					data[x + z * width + y * width * depth] = block.getData();
 					blocks[x + z * width + y * width * depth] = block.getType();
 				}
 			}
@@ -123,8 +138,9 @@ public class Arena {
 	 * System.out.println(randomint); } } } }
 	 */
 
+	@SuppressWarnings("deprecation")
 	public void regen() {
-		Bukkit.broadcastMessage(ChatColor.GREEN + "Regenerating arena " + getName());
+		Bukkit.broadcastMessage(main.getConfig().getString("Message-Prefix").replace("&", "§") + ChatColor.GREEN + "Regenerating arena " + getName());
 		int height, width, depth;
 		width = pos2.getBlockX() - pos1.getBlockX() + 1;
 		depth = pos2.getBlockZ() - pos1.getBlockZ() + 1;
@@ -133,6 +149,7 @@ public class Arena {
 			for (int z = 0; z < depth; z++) {
 				for (int x = 0; x < width; x++) {
 					pos1.getWorld().getBlockAt(pos1.getBlockX() + x, pos1.getBlockY() + y, pos1.getBlockZ() + z).setType(blocks[x + z * width + y * width * depth]);
+					pos1.getWorld().getBlockAt(pos1.getBlockX() + x, pos1.getBlockY() + y, pos1.getBlockZ() + z).setData((byte) data[x + z * width + y * width * depth]);
 				}
 			}
 		}

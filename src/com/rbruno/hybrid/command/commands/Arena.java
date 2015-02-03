@@ -21,22 +21,22 @@ public class Arena extends EngineCommand {
 		Player player = (Player) sender;
 		if (player.hasPermission(this.getPermission())) {
 			if (args.length < 1) {
-				player.sendMessage(ChatColor.RED + "Usage: /arena <arena_name>");
+				this.getMessage().sendMessage(player,ChatColor.RED + "Usage: /arena <arena_name>");
 				return;
 			}
 			for (com.rbruno.hybrid.Arena arena : this.getMain().arenas){
 				if (arena.getName().equals(args[0])){
 					if (player.hasPermission("hybrid.arena.*")||player.hasPermission("hybrid.arena." + args[0])){
 						player.teleport(arena.getSpawn());
-						player.sendMessage(ChatColor.GREEN + "Teleporting you to arena \"" + args[0] + "\"");
+						this.getMessage().sendMessage(player,ChatColor.GREEN + "Teleporting you to arena \"" + args[0] + "\"");
 						return;
 					}
-					player.sendMessage(this.getPermissionMessage());
+					this.getMessage().sendMessage(player,this.getPermissionMessage());
 				}
 			}
-			player.sendMessage(ChatColor.RED + "Arena not found");
+			this.getMessage().sendMessage(player,ChatColor.RED + "Arena not found");
 		} else {
-			player.sendMessage(this.getPermissionMessage());
+			this.getMessage().sendMessage(player,this.getPermissionMessage());
 		}
 	}
 

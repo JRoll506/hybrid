@@ -20,9 +20,9 @@ public class Hreload extends EngineCommand {
 				this.getMain().reloadConfig();
 				this.getMain().arenas.clear();
 				this.getMain().loadArenas();
-				player.sendMessage(ChatColor.GREEN + "Plugin config reloaded!");
+				this.getMessage().sendMessage(player,ChatColor.GREEN + "Plugin config reloaded!");
 			} else {
-				player.sendMessage(this.getPermissionMessage());
+				this.getMessage().sendMessage(player,this.getPermissionMessage());
 			}
 		} else {
 			this.getMain().reloadConfig();

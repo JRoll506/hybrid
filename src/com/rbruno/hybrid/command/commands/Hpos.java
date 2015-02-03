@@ -30,35 +30,35 @@ public class Hpos extends EngineCommand {
 			try {
 				pos = Integer.parseInt(args[0]);
 			} catch (NumberFormatException e) {
-				player.sendMessage(ChatColor.RED + "Usage: /hpos <1/2>");
+				this.getMessage().sendMessage(player,ChatColor.RED + "Usage: /hpos <1/2>");
 				return;
 			}
 			if (!(pos == 1) && !(pos == 2)) {
-				player.sendMessage(ChatColor.RED + "Usage: /hpos <1/2>");
+				this.getMessage().sendMessage(player,ChatColor.RED + "Usage: /hpos <1/2>");
 				return;
 			}
 			if (pos == 1) {
 				pos1.put(player, player.getLocation());
-				player.sendMessage(ChatColor.GREEN + "Set postion 1");
+				this.getMessage().sendMessage(player,ChatColor.GREEN + "Set postion 1");
 				return;
 			}
 			if (pos == 2) {
 				if (!(pos1.containsKey(player))) {
-					player.sendMessage(ChatColor.RED + "Set 1st postion first");
+					this.getMessage().sendMessage(player,ChatColor.RED + "Set 1st postion first");
 					return;
 				}
 				Location pos1a = pos1.get(player);
 				Location pos2a = player.getLocation();
 				if (pos2a.getBlockX() < pos1a.getBlockX()||pos2a.getBlockY() < pos1a.getBlockY()||pos2a.getBlockZ() < pos1a.getBlockZ()) {
-					player.sendMessage(ChatColor.RED + "You 2nd posstion cant be negitive in X, Y or Z cords");
+					this.getMessage().sendMessage(player,ChatColor.RED + "You 2nd posstion cant be negitive in X, Y or Z cords");
 					return;
 				}
-				player.sendMessage(ChatColor.GREEN + "Set postion 2");
+				this.getMessage().sendMessage(player,ChatColor.GREEN + "Set postion 2");
 				pos2.put(player, pos2a);
 			}
 
 		} else {
-			player.sendMessage(this.getPermissionMessage());
+			this.getMessage().sendMessage(player,this.getPermissionMessage());
 		}
 	}
 }

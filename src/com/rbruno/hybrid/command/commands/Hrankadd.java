@@ -18,7 +18,7 @@ public class Hrankadd extends EngineCommand {
 			Player player = (Player) sender;
 			if (player.hasPermission(this.getPermission())) {
 				if (args.length < 4) {
-					player.sendMessage(ChatColor.RED + "Usage: /hrankadd <Name> <tier> <item_name> <amount>");
+					this.getMessage().sendMessage(player,ChatColor.RED + "Usage: /hrankadd <Name> <tier> <item_name> <amount>");
 					return;
 				}
 				String name = args[0];
@@ -30,16 +30,16 @@ public class Hrankadd extends EngineCommand {
 					item = Integer.parseInt(args[2]);
 					amount = Integer.parseInt(args[3]);
 				} catch (NumberFormatException e) {
-					player.sendMessage(ChatColor.RED + "Usage: /hrankadd <Name> <tier> <item_name> <amount>");
+					this.getMessage().sendMessage(player,ChatColor.RED + "Usage: /hrankadd <Name> <tier> <item_name> <amount>");
 					return;
 				}
 				if (this.getConfig().getString("ranks." + name) != null) {
-					player.sendMessage(ChatColor.RED + "Name already taken \"" + name + "\"");
+					this.getMessage().sendMessage(player,ChatColor.RED + "Name already taken \"" + name + "\"");
 				}
 				this.getMain().rank.add(name, tier, item, amount);
-				player.sendMessage(ChatColor.GREEN + "Added rank " + name + " with tier " + tier);
+				this.getMessage().sendMessage(player,ChatColor.GREEN + "Added rank " + name + " with tier " + tier);
 			} else {
-				player.sendMessage(this.getPermissionMessage());
+				this.getMessage().sendMessage(player,this.getPermissionMessage());
 			}
 		} else {
 			if (args.length < 4) {

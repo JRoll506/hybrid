@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.rbruno.hybrid.command.CommandManager;
 import com.rbruno.hybrid.command.EngineCommand;
 import com.rbruno.hybrid.listner.ListenerManager;
+import com.rbruno.hybrid.messenger.Message;
 import com.rbruno.hybrid.rank.Rank;
 
 public class Main extends JavaPlugin {
@@ -24,6 +25,7 @@ public class Main extends JavaPlugin {
 	private Locations locations;
 	public ArrayList<Arena> arenas = new ArrayList<Arena>();
 	public Rank rank;
+	private Message message;
 
 	public void onEnable() {
 		this.saveDefaultConfig();
@@ -34,6 +36,8 @@ public class Main extends JavaPlugin {
 		commandManager = new CommandManager(this);
 		locations = new Locations(this);
 		new ListenerManager(this);
+		// Initializes messenger
+		message = new Message(this);
 		// Initializes the rank object
 		rank = new Rank(this);
 		loadArenas();
@@ -49,10 +53,16 @@ public class Main extends JavaPlugin {
 			for (int i = 0; i < intList.size(); i++) {
 				ints[i] = intList.get(i);
 			}
+
+			List<Integer> dataList = getConfig().getIntegerList("Arenas." + string + ".spawn.data");
+			int[] data = new int[dataList.size()];
+			for (int i = 0; i < dataList.size(); i++) {
+				data[i] = dataList.get(i);
+			}
 			Location pos1 = new Location(Bukkit.getWorld(getConfig().getString("Arenas." + string + ".world")), getConfig().getInt("Arenas." + string + ".pos1.x"), getConfig().getInt("Arenas." + string + ".pos1.y"), getConfig().getInt("Arenas." + string + ".pos1.z"));
 			Location pos2 = new Location(Bukkit.getWorld(getConfig().getString("Arenas." + string + ".world")), getConfig().getInt("Arenas." + string + ".pos2.x"), getConfig().getInt("Arenas." + string + ".pos2.y"), getConfig().getInt("Arenas." + string + ".pos2.z"));
 			Location spawn = new Location(Bukkit.getWorld(getConfig().getString("Arenas." + string + ".world")), getConfig().getInt("Arenas." + string + ".spawn.x"), getConfig().getInt("Arenas." + string + ".spawn.y"), getConfig().getInt("Arenas." + string + ".spawn.z"), Float.parseFloat(getConfig().getString("Arenas." + string + ".spawn.yaw")), Float.parseFloat(getConfig().getString("Arenas." + string + ".spawn.pitch")));
-			Arena arena = new Arena(string, pos1, pos2, spawn, ints, this);
+			Arena arena = new Arena(string, pos1, pos2, spawn, ints, data, this);
 			arena.startClock();
 			arenas.add(arena);
 
@@ -100,10 +110,14 @@ public class Main extends JavaPlugin {
 		return rank;
 	}
 
+	public Message getMessage() {
+		return message;
+	}
+
 	public void removeArena(Arena arena) {
 		arena.remove();
 		arenas.remove(arena);
-		
+
 	}
 
 }

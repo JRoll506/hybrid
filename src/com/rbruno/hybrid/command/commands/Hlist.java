@@ -18,12 +18,12 @@ public class Hlist extends EngineCommand {
 		if (sender instanceof Player){
 			Player player = (Player) sender;
 			if (player.hasPermission(this.getPermission())) {
-				player.sendMessage(ChatColor.GREEN + "--------Arenas--------");
+				this.getMessage().sendMessage(player,ChatColor.GREEN + "--------Arenas--------");
 				for (Arena arena : this.getMain().arenas) {
-					player.sendMessage(ChatColor.GREEN + "*" + arena.getName());
+					this.getMessage().sendMessage(player,ChatColor.GREEN + "*" + arena.getName());
 				}
 			} else {
-				player.sendMessage(this.getPermissionMessage());
+				this.getMessage().sendMessage(player,this.getPermissionMessage());
 			}
 		} else {
 			System.out.println(ChatColor.GREEN + "--------Arenas--------");
